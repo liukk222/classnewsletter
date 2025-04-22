@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级通讯录管理系统 - 修改用户</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 自定义CSS -->
+    <style>
+        :root {
+            --bs-primary: #5a8dee;
+            --bs-danger: #dc3545;
+            --bs-warning: #ffc107;
+            --bs-body-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bs-body-bg);
+            padding-top: 1rem;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .navbar-brand svg {
+            height: 32px;
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .update-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .form-title {
+            color: var(--bs-danger);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn-warning {
+            background-color: var(--bs-warning);
+            border-color: var(--bs-warning);
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #ffca2c;
+            border-color: #ffc720;
+        }
+
+        .logout-btn {
+            background-color: var(--bs-danger);
+            border-color: var(--bs-danger);
+            margin-left: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background-color: #bb2d3b;
+            border-color: #b02a37;
+        }
+
+        .back-btn {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+
+        .back-btn:hover {
+            background-color: #3a75e8;
+            border-color: #3a75e8;
+        }
+
+        .error-message {
+            color: var(--bs-danger);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form-control:focus {
+            border-color: var(--bs-danger);
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .disabled-field {
+            background-color: #e9ecef;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 94" fill="#dc3545">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
+                    </path>
+                </svg>
+                班级通讯录管理系统-管理员端
+            </a>
+            <div class="d-flex">
+                <a href="/administrator" class="btn btn-primary back-btn">返回用户管理</a>
+                <a href="/admin/logout" class="btn btn-danger logout-btn">管理员退出</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 修改用户表单 -->
+    <div class="container">
+        <div class="update-container">
+            <h2 class="form-title">修改用户信息</h2>
+
+            <form action="/admin/update-user?studentid={{.studentid}}" method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="studentid" class="form-label">学号</label>
+                            <input type="text" class="form-control" id="studentid" name="studentid"
+                                value="{{.studentid}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="class" class="form-label">班级</label>
+                            <input type="text" class="form-control" id="class" name="class" value="{{.class}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">姓名</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{.username}}"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">密码</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                value="{{.password}}" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="phonenumber" class="form-label">电话号码</label>
+                            <input type="tel" class="form-control" id="phonenumber" name="phonenumber"
+                                value="{{.phonenumber}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="qqnumber" class="form-label">QQ号码</label>
+                            <input type="text" class="form-control" id="qqnumber" name="qqnumber" value="{{.qqnumber}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="wxnumber" class="form-label">微信号</label>
+                            <input type="text" class="form-control" id="wxnumber" name="wxnumber" value="{{.wxnumber}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="addres" class="form-label">地址</label>
+                            <input type="text" class="form-control" id="addres" name="addres" value="{{.addres}}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-warning btn-lg">保存修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

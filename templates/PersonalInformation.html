@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级通讯录管理系统 - 个人信息</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 自定义CSS -->
+    <style>
+        :root {
+            --bs-primary: #5a8dee;
+            --bs-danger: #dc3545;
+            --bs-primary-rgb: 90, 141, 238;
+            --bs-body-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bs-body-bg);
+            padding-top: 1rem;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .navbar-brand svg {
+            height: 32px;
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .profile-header {
+            color: var(--bs-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .info-value {
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+            padding: 0.5rem 1.5rem;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #3a75e8;
+            border-color: #3a75e8;
+        }
+
+        .btn-outline-primary {
+            color: var(--bs-primary);
+            border-color: var(--bs-primary);
+            padding: 0.5rem 1.5rem;
+        }
+
+        .btn-outline-primary:hover,
+        .btn-outline-primary:focus {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+
+        .btn-danger {
+            background-color: var(--bs-danger);
+            border-color: var(--bs-danger);
+            padding: 0.5rem 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-danger:hover {
+            background-color: #bb2d3b;
+            border-color: #b02a37;
+        }
+
+        .delete-account-section {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 94" fill="#5a8dee">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
+                    </path>
+                </svg>
+                班级通讯录管理系统
+            </a>
+            <div class="d-flex">
+                <a href="/exit" class="btn btn-outline-danger">退出登录</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 个人信息内容 -->
+    <div class="container">
+        <div class="profile-container">
+            <h2 class="profile-header">个人信息</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-item">
+                        <div class="info-label">学号</div>
+                        <div class="info-value">{{.studentid}}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">班级</div>
+                        <div class="info-value">{{.class}}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">姓名</div>
+                        <div class="info-value">{{.username}}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">密码</div>
+                        <div class="info-value">{{.password}}</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="info-item">
+                        <div class="info-label">电话号码</div>
+                        <div class="info-value">{{.phonenumber}}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">QQ号码</div>
+                        <div class="info-value">{{.qqnumber}}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">微信号</div>
+                        <div class="info-value">{{.wxnumber}}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-label">地址</div>
+                        <div class="info-value">{{.addres}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="/update" class="btn btn-primary">更新个人信息</a>
+                <a href="/inquire" class="btn btn-outline-primary">查看班级成员</a>
+            </div>
+
+            <div class="delete-account-section">
+                <form id="deleteAccountForm" action="/delete-account?studentid={{ .studentid }}" method="POST"
+                    onsubmit="return confirmDeleteAccount()">
+                    <button type="submit" class="btn btn-danger">注销账号</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 自定义脚本 -->
+    <script>
+        function confirmDeleteAccount() {
+            return confirm('⚠️ 警告：确定要注销账号吗？此操作将永久删除您的所有信息且不可恢复！');
+        }
+    </script>
+</body>
+
+</html>

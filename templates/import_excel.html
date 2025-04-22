@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级通讯录管理系统 - 导入Excel</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 自定义CSS -->
+    <style>
+        :root {
+            --bs-primary: #5a8dee;
+            --bs-danger: #dc3545;
+            --bs-success: #198754;
+            --bs-body-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bs-body-bg);
+            padding-top: 1rem;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .navbar-brand svg {
+            height: 32px;
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .content-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--bs-danger);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: bold;
+        }
+
+        .file-upload-container {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background-color: #f8f9fa;
+            transition: all 0.3s;
+        }
+
+        .file-upload-container:hover {
+            border-color: var(--bs-primary);
+            background-color: #f0f7ff;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--bs-primary);
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #4a77d4;
+            border-color: #4a77d4;
+        }
+
+        .template-download {
+            margin-top: 1rem;
+        }
+
+        .alert-result {
+            margin-top: 2rem;
+        }
+
+        .instructions {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .instructions ul {
+            margin-bottom: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+
+        .instructions li:last-child {
+            margin-bottom: 0;
+        }
+
+        .error-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 94" fill="#dc3545">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
+                    </path>
+                </svg>
+                班级通讯录管理系统-管理员端
+            </a>
+            <div class="d-flex">
+                <a href="/administrator" class="btn btn-outline-secondary me-2">返回管理面板</a>
+                <a href="/admin/logout" class="btn btn-danger">管理员退出</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 导入Excel文件区域 -->
+        <div class="content-container">
+            <h3 class="section-title">导入Excel文件</h3>
+
+            <!-- 操作说明 -->
+            <div class="instructions">
+                <h5>使用说明：</h5>
+                <ul>
+                    <li>您可以通过Excel文件批量导入班级通讯录数据</li>
+                    <li>请确保Excel文件包含必要的列：<strong>学号*</strong>、<strong>班级*</strong>、<strong>密码*</strong>（带*的为必填项）</li>
+                    <li>如果学号已存在，该条记录将被跳过（不会覆盖现有数据）</li>
+                    <li>您可以下载模板文件，按照模板格式填写数据后上传</li>
+                </ul>
+            </div>
+
+            <!-- 下载模板按钮 -->
+            <div class="template-download text-center">
+                <a href="/admin/download-template" class="btn btn-outline-primary">
+                    <i class="bi bi-download"></i> 下载Excel导入模板
+                </a>
+            </div>
+
+            <!-- 上传表单 -->
+            <form action="/admin/import-excel" method="POST" enctype="multipart/form-data">
+                <div class="file-upload-container mt-4">
+                    <div class="upload-icon">
+                        <i class="bi bi-file-earmark-excel"></i>
+                    </div>
+                    <h5>选择或拖放Excel文件</h5>
+                    <p class="text-muted">支持 .xlsx 或 .xls 格式</p>
+                    <input type="file" name="excel_file" class="form-control" accept=".xlsx,.xls" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-upload"></i> 开始导入
+                    </button>
+                </div>
+            </form>
+
+            <!-- 导入结果提示 -->
+            {{if .error}}
+            <div class="alert alert-danger alert-result" role="alert">
+                <h5>导入失败</h5>
+                <p>{{.error}}</p>
+            </div>
+            {{else if .resultInfo}}
+            <div class="alert {{if .success}}alert-success{{else}}alert-warning{{end}} alert-result" role="alert">
+                <h5>导入结果</h5>
+                <p>{{.resultInfo}}</p>
+
+                {{if .errorMessages}}
+                <hr>
+                <p>详细错误信息:</p>
+                <div class="error-list">
+                    <ul>
+                        {{range .errorMessages}}
+                        <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                </div>
+                {{end}}
+            </div>
+            {{end}}
+        </div>
+
+        <!-- 数据导出区域 -->
+        <div class="content-container">
+            <h3 class="section-title">导出Excel文件</h3>
+            <p>您可以将班级通讯录数据导出为Excel文件。</p>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <a href="/admin/export-excel" class="btn btn-success w-100">
+                        <i class="bi bi-download"></i> 导出所有用户数据
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <form action="/admin/export-excel" method="GET" class="d-flex">
+                        <input type="text" name="class" class="form-control me-2" placeholder="输入班级">
+                        <button type="submit" class="btn btn-outline-success">
+                            <i class="bi bi-download"></i> 导出指定班级
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS 和 Bootstrap 图标 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</body>
+
+</html>

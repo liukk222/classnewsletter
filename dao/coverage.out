@@ -1,0 +1,22 @@
+mode: set
+classnewsletter/dao/dao.go:32.13,35.16 3 0
+classnewsletter/dao/dao.go:35.16,37.3 1 0
+classnewsletter/dao/dao.go:38.2,39.31 2 0
+classnewsletter/dao/dao.go:42.48,44.2 1 0
+classnewsletter/dao/dao.go:45.56,49.2 3 0
+classnewsletter/dao/dao.go:51.50,53.2 1 0
+classnewsletter/dao/dao.go:55.56,58.16 3 0
+classnewsletter/dao/dao.go:58.16,60.3 1 0
+classnewsletter/dao/dao.go:60.8,63.3 1 0
+classnewsletter/dao/dao.go:66.50,68.2 1 0
+classnewsletter/dao/dao.go:70.56,74.2 3 0
+classnewsletter/dao/dao.go:76.73,79.16 3 0
+classnewsletter/dao/dao.go:79.16,81.3 1 0
+classnewsletter/dao/dao.go:81.8,84.3 1 0
+classnewsletter/dao/dao.go:87.96,90.16 3 0
+classnewsletter/dao/dao.go:90.16,92.3 1 0
+classnewsletter/dao/dao.go:92.8,95.3 1 0
+classnewsletter/dao/dao.go:98.89,102.2 3 0
+classnewsletter/dao/dao.go:104.71,107.16 3 0
+classnewsletter/dao/dao.go:107.16,109.3 1 0
+classnewsletter/dao/dao.go:109.8,112.3 1 0
