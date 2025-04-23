@@ -423,7 +423,7 @@ func AdministratorLogin(c *gin.Context) { //管理员登录
 	administrator := c.PostForm("administrator")
 	password := c.PostForm("password")
 
-	if administrator == "202209120232" {
+	if administrator == "root" {
 		if password == "123456" {
 			// 创建管理员数据
 			adminData := map[string]string{
